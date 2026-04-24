@@ -19,7 +19,7 @@ export default function App() {
       const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.category.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchPrice = p.price > priceRange.min && p.price <= priceRange.max; 
+      const matchPrice = p.price > priceRange.min && p.price <= priceRange.max;  //bug-1 included less than or equal to max
       const matchCategory = category === 'All' || p.category === category;
       return matchSearch && matchPrice && matchCategory;
     });
@@ -32,7 +32,7 @@ export default function App() {
       default: break;
     }
     return list;
-  }, [searchQuery, priceRange, sortBy]);
+  }, [searchQuery, priceRange, category, sortBy]); //bug-2
 
   function addToCart(product) {
     setCartItems(prev => {
