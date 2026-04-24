@@ -44,7 +44,7 @@ export default function App() {
   }
 
   function removeFromCart(id) {
-    setCartItems(prev => prev.filter(i => i.id === id));
+    setCartItems(prev => prev.filter(i => i.id !== id));//bug_3
   }
 
   function updateQty(id, qty) {
@@ -52,8 +52,10 @@ export default function App() {
     setCartItems(prev => prev.map(i => i.id === id ? { ...i, qty } : i));
   }
 
-  const cartCount = cartItems.reduce((sum, i) => sum + i.count, 0);
-  const cartItemIds = new Set(cartItems.map(i => i.productId));
+
+  
+  const cartCount = cartItems.reduce((sum, i) => sum + i.qty, 0);//bug-4
+  const cartItemIds = new Set(cartItems.map(i => i.id));//bug-5
 
   return (
     <div className="app">
